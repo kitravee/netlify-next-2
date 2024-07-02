@@ -4,7 +4,7 @@ import type { Liff } from "@line/liff";
 import { useState, useEffect } from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [liffObject, setLiffObject] = useState<Liff | null>(null);
+  const [liffObject, setLiffObject] = useState<Liff | null| any>(null);
   const [liffError, setLiffError] = useState<string | null>(null);
 
   // Execute liff.init() when the app is initialized
@@ -19,8 +19,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           .then(() => {
             const idToken = liff.getDecodedIDToken();
             console.log(idToken); // print decoded idToken object
+            console.log(liff.isLoggedIn())
             console.log("LIFF init succeeded.");
-            setLiffObject({...liff, ...idToken});
+            setLiffObject({...liff, isLogin: liff.isLoggedIn()});
           })
           .catch((error: Error) => {
             console.log("LIFF init failed.");
