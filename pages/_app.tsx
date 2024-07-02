@@ -17,8 +17,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         liff
           .init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID! })
           .then(() => {
+            const idToken = liff.getDecodedIDToken();
+            console.log(idToken); // print decoded idToken object
             console.log("LIFF init succeeded.");
-            setLiffObject(liff);
+            setLiffObject({...liff, ...idToken});
           })
           .catch((error: Error) => {
             console.log("LIFF init failed.");
