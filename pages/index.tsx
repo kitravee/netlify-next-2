@@ -17,6 +17,7 @@ const Home: NextPage<{ liff: Liff | null; liffError: string | null }> = ({
 
       <main className={styles.main}>
         <h1>create-liff-app</h1>
+        {liff && JSON.stringify(liff)}
         {liff && <p>LIFF init succeeded.</p>}
         {liffError && (
           <>
